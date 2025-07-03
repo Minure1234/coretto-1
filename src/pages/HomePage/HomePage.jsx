@@ -1,9 +1,11 @@
+// getPostmanCollection funksiyasını import edin
+import { getPostmanCollection } from "../../api/fetchApi";
 
-import img1 from  "../../assets/images/hone.jpg"
-import img2 from  "../../assets/images/htwo.jpg"
-import img3 from "../../assets/images/hthree.jpg"
-import "./HomePage.scss"
-import  { useState, useEffect } from "react";
+import img1 from "../../assets/images/hone.jpg";
+import img2 from "../../assets/images/htwo.jpg";
+import img3 from "../../assets/images/hthree.jpg";
+import "./HomePage.scss";
+import { useState, useEffect } from "react";
 
 const slides = [
   {
@@ -28,7 +30,9 @@ const slides = [
 
 const Carousel = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [postmanData, setPostmanData] = useState([]);
 
+  // Carousel üçün timer
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % slides.length);
@@ -37,13 +41,41 @@ const Carousel = () => {
     return () => clearInterval(timer);
   }, []);
 
+  // API məlumatlarını console.log etmək və state-də saxlamaq üçün
+  useEffect(() => {
+    const fetchAndLogData = async () => {
+      try {
+        console.log("API məlumatları yüklənir...");
+        const data = await getPostmanCollection();
+
+        // Console.log et
+        console.log("Postman Collection məlumatları:", data);
+        console.log("Məlumatların sayı:", data.length);
+
+        // State-də saxla
+        setPostmanData(data);
+
+        // Hər bir elementi ayrıca görmək üçün
+        data.forEach((item, index) => {
+          console.log(`Element ${index + 1}:`, item);
+        });
+      } catch (error) {
+        console.error("API məlumatlarını yükləyərkən xəta:", error);
+      }
+    };
+
+    fetchAndLogData();
+  }, []); // Komponent yüklənəndə bir dəfə çalışacaq
+
   return (
     <div className="carousel">
       <div className="carousel-inner">
         {slides.map((slide, index) => (
           <div
             key={slide.id}
-            className={`carousel-item ${index === currentIndex ? "active" : ""}`}
+            className={`carousel-item ${
+              index === currentIndex ? "active" : ""
+            }`}
           >
             <div className="bg-image">
               <img src={slide.image} alt={`Slide ${index + 1}`} />
@@ -91,8 +123,5 @@ const Carousel = () => {
     </div>
   );
 };
-
-
-
 
 export default Carousel;
