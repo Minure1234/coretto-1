@@ -38,7 +38,7 @@ const Footer = () => {
     >
       <div className="footer-overlay">
         <img src={logo} alt="Corretto Logo" className="footer-logo" />
-
+<p className="footer-title">CORRETTO</p>
         <p className="footer-description">
           “Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
           labore et dolore magna aliqua. Ut enim ad minim veniam, nostrud exercitation ullamco laboris.”
