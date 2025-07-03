@@ -1,0 +1,110 @@
+.footer {
+  background-size: cover;
+  background-position: center;
+  padding: 60px 20px;
+  position: relative;
+  color: #fff;
+
+  .footer-overlay {
+    padding: 40px 20px;
+    max-width: 800px;
+    margin: 0 auto;
+    border-radius: 16px;
+    text-align: center;
+  }
+
+  .footer-logo {
+    max-width: 180px;
+    margin-bottom: 20px;
+  }
+
+  .footer-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #ddd;
+    margin-bottom: 30px;
+  }
+
+  .footer-locations {
+    margin-bottom: 40px;
+
+    h3 {
+      font-size: 20px;
+      color: #fff8e7;
+      margin-bottom: 10px;
+    }
+
+    p {
+      margin: 4px 0;
+      color: #ccc;
+      font-size: 15px;
+    }
+  }
+
+  .footer-newsletter {
+    h3 {
+      font-size: 20px;
+      color: #fff8e7;
+      margin-bottom: 10px;
+    }
+
+    .newsletter-input {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 10px;
+      margin-top: 10px;
+
+      input {
+        padding: 10px 15px;
+        border-radius: 8px;
+        border: none;
+        outline: none;
+        font-size: 14px;
+        width: 250px;
+        transition: border 0.3s;
+
+        &.input-error {
+          border: 2px solid #ff4d4f;
+        }
+      }
+
+      button {
+        background-color: #8B4513;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        padding: 10px 15px;
+        cursor: pointer;
+        font-size: 16px;
+        transition: background-color 0.3s;
+
+        i {
+          pointer-events: none;
+        }
+
+        &:hover {
+          background-color: #A0522D;
+        }
+      }
+    }
+
+    .error-message {
+      color: #ff4d4f;
+      font-size: 14px;
+      margin-top: 8px;
+    }
+  }
+
+  
+  @media (max-width: 480px) {
+    .newsletter-input {
+      flex-direction: column;
+
+      input,
+      button {
+        width: 100%;
+      }
+    }
+  }
+}

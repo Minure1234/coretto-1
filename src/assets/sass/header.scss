@@ -1,0 +1,291 @@
+@use "sass:color";
+
+$primary-color: #f7a048;
+$text-color: #ffffff;
+$dark-bg-color: #333333;
+$dropdown-bg-color: #222222;
+$link-hover-color: $primary-color;
+$breakpoint-tablet: 768px;
+$breakpoint-desktop: 992px;
+
+.navbar {
+  background-color: $dark-bg-color;
+  color: $text-color;
+  padding: 15px 20px;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+  .container-fluid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+
+  .logo {
+    img {
+      height: 45px;
+      vertical-align: middle;
+    }
+  }
+
+  .right-section {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+
+    .menu {
+      display: flex;
+      gap: 30px;
+
+      @media (max-width: $breakpoint-tablet) {
+        display: none;
+      }
+
+      .nav-item-dropdown {
+        position: relative;
+        padding: 5px 0 20px 0;
+
+        &:hover .dropdown-content {
+          display: block;
+        }
+
+        .nav-link {
+          color: $text-color;
+          text-decoration: none;
+          font-weight: 500;
+          font-size: 16px;
+          text-transform: uppercase;
+          transition: color 0.3s ease;
+
+          &:hover {
+            color: $link-hover-color;
+          }
+        }
+
+        .dropdown-content {
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          background-color: $dropdown-bg-color;
+          min-width: 220px;
+          box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.4);
+          z-index: 10;
+          padding: 10px 0;
+          list-style: none;
+          margin: 0;
+          border-top: 2px solid $primary-color;
+
+          a {
+            color: $text-color;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            font-size: 15px;
+            white-space: nowrap;
+            transition: background-color 0.2s ease, color 0.2s ease;
+
+            &:hover {
+              background-color: color.adjust($dropdown-bg-color, $lightness: 10%);
+              color: $link-hover-color;
+            }
+          }
+        }
+      }
+    }
+
+    .icons {
+      display: flex;
+      align-items: center;
+      gap: 25px;
+
+      .cart-icon,
+      .search-icon,
+      .user-icon,
+      .mobile-menu-icon {
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        
+        a {
+            color: inherit;
+            text-decoration: none;
+        }
+
+        svg {
+          width: 24px;
+          height: 24px;
+          color: $text-color;
+          transition: color 0.3s ease;
+          &:hover {
+            color: $link-hover-color;
+          }
+        }
+      }
+
+      .cart-icon {
+        position: relative;
+        
+        .cart-count {
+          position: absolute;
+          top: -8px;
+          right: -8px;
+          background-color: $primary-color;
+          color: $dark-bg-color;
+          font-size: 11px;
+          font-weight: bold;
+          border-radius: 50%;
+          padding: 2px 6px;
+          min-width: 20px;
+          text-align: center;
+          line-height: 1;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          transform: translate(50%, -50%);
+        }
+      }
+
+      .mobile-menu-icon {
+        display: none;
+        @media (max-width: $breakpoint-tablet) {
+          display: block;
+        }
+      }
+    }
+  }
+
+  .mobile-menu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 300px;
+    max-width: 80%;
+    height: 100%;
+    background-color: $dropdown-bg-color;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    transition: right 0.4s ease-in-out;
+    z-index: 1005;
+    box-shadow: -5px 0 10px rgba(0, 0, 0, 0.3);
+
+    &.open {
+      right: 0;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      cursor: pointer;
+      color: $text-color;
+
+      svg {
+        width: 28px;
+        height: 28px;
+      }
+    }
+
+    .nav-link {
+      color: $text-color;
+      text-decoration: none;
+      padding: 15px 0;
+      width: 100%;
+      text-align: left;
+      font-size: 17px;
+      border-bottom: 1px solid rgba($text-color, 0.1);
+      transition: background-color 0.2s ease, color 0.2s ease;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: color.adjust($dropdown-bg-color, $lightness: 5%);
+        color: $link-hover-color;
+      }
+    }
+
+    @media (min-width: $breakpoint-tablet) {
+      display: none;
+    }
+  }
+
+  .search-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1010;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+
+    &.open {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 90%;
+      max-width: 700px;
+      gap: 15px;
+
+      input {
+        width: 100%;
+        padding: 15px 20px;
+        border: none;
+        background-color: rgba($text-color, 0.1);
+        color: $text-color;
+        font-size: 18px;
+        border-radius: 5px;
+        outline: none;
+        &::placeholder {
+          color: rgba($text-color, 0.6);
+        }
+      }
+
+      button {
+        padding: 12px 25px;
+        background-color: $primary-color;
+        color: $dark-bg-color;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+        font-weight: bold;
+        transition: background-color 0.3s ease;
+        min-width: 120px;
+
+        &:hover {
+          background-color: color.adjust($primary-color, $lightness: -10%);
+        }
+
+        &.back-btn {
+          background-color: #888;
+          color: $text-color;
+          &:hover {
+            background-color: #666;
+          }
+        }
+      }
+    }
+  }
+}
