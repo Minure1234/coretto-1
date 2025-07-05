@@ -17,3 +17,4 @@ export const getPostmanCollection = async () => {
     throw error;
   }
 };
+const salam = "salam";
